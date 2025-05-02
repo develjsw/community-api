@@ -1,0 +1,9 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/slave-client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("SLAVE_DATABASE_URL")
+}
