@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import * as path from 'path';
 import { ConfigModule } from '@nestjs/config';
-import { PostModule } from './presentation/module/post.module';
 
 let envFile = 'env.local';
 switch (process.env.NODE_ENV) {
@@ -22,7 +21,6 @@ switch (process.env.NODE_ENV) {
             isGlobal: true,
             cache: true
         }),
-        PostModule
     ],
     controllers: [AppController],
     providers: [AppService]
