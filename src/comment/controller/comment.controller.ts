@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('posts')
-export class PostController {
+@Controller('comments')
+export class CommentController {
     constructor() {}
 }
