@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../../../prisma/generated/master-client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("MASTER_DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model board {
+  board_id    Int       @id @default(autoincrement())
+  board_name  String    @db.VarChar(150)
+  member_id   Int
+  description String?   @db.Text
+  created_at  DateTime  @default(now()) @db.DateTime(0)
+  deleted_at  DateTime? @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model category {
+  category_id        Int       @id @default(autoincrement())
+  board_id           Int?
+  parent_category_id Int?
+  category_depth     Int       @default(0)
+  category_name      String    @db.VarChar(100)
+  created_at         DateTime  @default(now()) @db.DateTime(0)
+  updated_at         DateTime? @db.DateTime(0)
+  deleted_at         DateTime? @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model comment {
+  comment_id        Int       @id @default(autoincrement())
+  post_id           Int
+  member_id         Int
+  parent_comment_id Int?
+  content           String    @db.Text
+  created_at        DateTime  @default(now()) @db.DateTime(0)
+  updated_at        DateTime? @db.DateTime(0)
+  deleted_at        DateTime? @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model comment_file {
+  comment_file_id  Int      @id @default(autoincrement())
+  comment_id       Int
+  file_path        String   @db.VarChar(100)
+  file_origin_name String   @db.VarChar(100)
+  file_hash_name   String   @db.VarChar(200)
+  created_at       DateTime @default(now()) @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model comment_hashtag {
+  comment_hashtag_id Int      @id @default(autoincrement())
+  comment_id         Int
+  hashtag_name       String   @db.VarChar(50)
+  created_at         DateTime @default(now()) @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model member {
+  member_id   Int       @id @default(autoincrement())
+  member_name String    @db.VarChar(50)
+  email       String    @unique(map: "email") @db.VarChar(100)
+  password    String    @db.VarChar(200)
+  created_at  DateTime  @default(now()) @db.DateTime(0)
+  updated_at  DateTime? @db.DateTime(0)
+  deleted_at  DateTime? @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model member_login_log {
+  member_login_log_id Int      @id @default(autoincrement())
+  member_id           Int
+  ip                  String?  @db.VarChar(45)
+  device_type         String?  @db.VarChar(10)
+  created_at          DateTime @default(now()) @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model post {
+  post_id    Int       @id @default(autoincrement())
+  board_id   Int
+  member_id  Int
+  title      String    @db.VarChar(200)
+  content    String    @db.Text
+  view_count Int       @default(0)
+  created_at DateTime  @default(now()) @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model post_file {
+  post_file_id     Int      @id @default(autoincrement())
+  post_id          Int
+  file_path        String   @db.VarChar(100)
+  file_origin_name String   @db.VarChar(100)
+  file_hash_name   String   @db.VarChar(200)
+  created_at       DateTime @default(now()) @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model post_hashtag {
+  post_hashtag_id Int      @id @default(autoincrement())
+  post_id         Int
+  hashtag_name    String   @db.VarChar(50)
+  created_at      DateTime @default(now()) @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model post_reaction {
+  post_id       Int
+  member_id     Int
+  reaction_type String   @db.VarChar(10)
+  created_at    DateTime @default(now()) @db.DateTime(0)
+
+  @@id([post_id, member_id])
+}
