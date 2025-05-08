@@ -1,8 +1,9 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma-master-client';
+import { PrismaMasterClientInterface } from '../interface/prisma-master-client.interface';
 
 @Injectable()
-export class PrismaMasterClientService extends PrismaClient implements OnModuleInit {
+export class PrismaMasterClientService extends PrismaClient implements OnModuleInit, PrismaMasterClientInterface {
     constructor() {
         super({
             datasources: {
