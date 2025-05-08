@@ -6,5 +6,5 @@ export interface PrismaMasterClientInterface {
     post: Prisma.postDelegate;
     comment: Prisma.commentDelegate;
 
-    runInTransaction<T>(callback: (tx: Prisma.TransactionClient) => Promise<T>): Promise<T>
+    runInTransaction<T>(callback: (tx: Prisma.TransactionClient) => Promise<T>): Promise<T>;
 }

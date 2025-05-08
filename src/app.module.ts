@@ -5,6 +5,7 @@ import * as path from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
+import { PrismaModule } from './common/prisma/prisma.module';
 
 let envFile = 'env.local';
 switch (process.env.NODE_ENV) {
@@ -23,6 +24,7 @@ switch (process.env.NODE_ENV) {
             isGlobal: true,
             cache: true
         }),
+        PrismaModule,
         PostModule,
         CommentModule
     ],
