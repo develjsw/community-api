@@ -11,7 +11,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@prisma-master-client": ["prisma/generated/master-client"]
+      "@prisma-master-client": ["prisma/generated/master-client"],
+      "@prisma-slave-client": ["prisma/generated/slave-client"]
     },
     "incremental": true,
     "skipLibCheck": true,

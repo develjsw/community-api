@@ -19,7 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "master:prisma:db:pull": "npx prisma db pull --schema=src/common/prisma/schema/master/schema.prisma",
-    "master:prisma:generate": "npx prisma generate --schema=src/common/prisma/schema/master/schema.prisma"
+    "master:prisma:generate": "npx prisma generate --schema=src/common/prisma/schema/master/schema.prisma",
+    "slave:prisma:db:pull": "npx prisma db pull --schema=src/common/prisma/schema/slave/schema.prisma",
+    "slave:prisma:generate": "npx prisma generate --schema=src/common/prisma/schema/slave/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",
