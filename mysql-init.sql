@@ -165,9 +165,9 @@ ALTER TABLE comment_file ADD FOREIGN KEY (comment_id) REFERENCES comment(comment
 ALTER TABLE post_hashtag ADD FOREIGN KEY (post_id) REFERENCES post(post_id);
 ALTER TABLE comment_hashtag ADD FOREIGN KEY (comment_id) REFERENCES comment(comment_id);
 ALTER TABLE member_login_log ADD FOREIGN KEY (member_id) REFERENCES member(member_id);
-ALTER TABLE member_block ADD FOREIGN KEY (blocker_id) REFERENCES member(member_id);
-ALTER TABLE member_block ADD FOREIGN KEY (blocked_id) REFERENCES member(member_id);
-ALTER TABLE member_block_log ADD FOREIGN KEY (blocker_id) REFERENCES member(member_id);
-ALTER TABLE member_block_log ADD FOREIGN KEY (blocked_id) REFERENCES member(member_id);
+ALTER TABLE member_block ADD FOREIGN KEY (blocker_member_id) REFERENCES member(member_id);
+ALTER TABLE member_block ADD FOREIGN KEY (blocked_member_id) REFERENCES member(member_id);
+ALTER TABLE member_block_log ADD FOREIGN KEY (blocker_member_id) REFERENCES member(member_id);
+ALTER TABLE member_block_log ADD FOREIGN KEY (blocked_member_id) REFERENCES member(member_id);
 ALTER TABLE keyword ADD FOREIGN KEY (member_id) REFERENCES member(member_id);
 ALTER TABLE keyword_notification ADD FOREIGN KEY (post_id) REFERENCES post(post_id);
