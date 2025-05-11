@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaSlaveClientService } from '../../../common/prisma/service/prisma-slave-client.service';
 import { PostRepositoryQueryInterface } from '../../interface/query/post-repository-query.interface';
 import { PostEntity } from '../../entity/post.entity';
+import { PostMapper } from '../../mapper/post.mapper';
 
 @Injectable()
 export class GetPostQuery implements PostRepositoryQueryInterface {
@@ -14,18 +15,6 @@ export class GetPostQuery implements PostRepositoryQueryInterface {
             }
         });
 
-        return findResult
-            ? new PostEntity(
-                  findResult.post_id,
-                  findResult.board_id,
-                  findResult.member_id,
-                  findResult.title,
-                  findResult.content,
-                  findResult.view_count,
-                  findResult.created_at,
-                  findResult.updated_at,
-                  findResult.deleted_at
-              )
-            : null;
+        return findResult ? PostMapper.toEntity(findResult) : null;
     }
 }
