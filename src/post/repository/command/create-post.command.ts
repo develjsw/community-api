@@ -1,17 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PostRepositoryCommandInterface } from '../../interface/command/post-repository-command.interface';
 import { PostEntity } from '../../entity/post.entity';
-import {
-    PRISMA_MASTER_CLIENT,
-    PrismaMasterClientInterface
-} from '../../../common/prisma/interface/prisma-master-client.interface';
+import { PrismaMasterClientService } from '../../../common/prisma/service/prisma-master-client.service';
 
 @Injectable()
 export class CreatePostCommand implements PostRepositoryCommandInterface {
-    constructor(
-        @Inject(PRISMA_MASTER_CLIENT)
-        private readonly prisma: PrismaMasterClientInterface
-    ) {}
+    constructor(private readonly prisma: PrismaMasterClientService) {}
 
     async createPost(data: PostEntity): Promise<PostEntity> {
         const { boardId, memberId, title, content, viewCount } = data;
