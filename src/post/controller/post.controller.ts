@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { PostService } from '../service/post.service';
-import { PostEntity } from '../entity/post.entity';
+import { PostType } from '../type/post.type';
 
 @Controller('posts')
 export class PostController {
@@ -13,7 +13,7 @@ export class PostController {
     }
 
     @Get(':postId')
-    async getPost(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
-        return await this.postService.getPost({ postId });
+    async getPost(@Param('postId', ParseIntPipe) postId: number): Promise<PostType> {
+        return await this.postService.getPost(postId);
     }
 }
